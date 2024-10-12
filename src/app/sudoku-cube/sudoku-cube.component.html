@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    @for (tower of upperTowers; track $index) {
+      <td>
+        <s3d-sudoku-plane [plane]="tower"></s3d-sudoku-plane>
+      </td>
+    }
+  </tr>
+  <tr>
+    @for (tower of lowerTowers; track $index) {
+      <td>
+        <s3d-sudoku-plane [plane]="tower"></s3d-sudoku-plane>
+      </td>
+    }
+  </tr>
+</table>

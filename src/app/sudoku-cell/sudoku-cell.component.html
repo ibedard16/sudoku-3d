@@ -1,0 +1,54 @@
+@if (cell?.value) {
+  <div class="value">{{ cell?.value }} </div>
+} @else {
+  <table>
+    <tr>
+      <td>
+        @if (cell?.possibleValues?.has(1)) {
+          1
+        }
+      </td>
+      <td>
+        @if (cell?.possibleValues?.has(2)) {
+          2
+        }
+      </td>
+      <td>
+        @if (cell?.possibleValues?.has(3)) {
+          3
+        }
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @if (cell?.possibleValues?.has(4)) {
+          4
+        }
+      </td>
+      <td>
+        @if (cell?.possibleValues?.has(5)) {
+          5
+        }
+      </td>
+      <td>
+        @if (cell?.possibleValues?.has(6)) {
+          6
+        }
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @if (cell?.possibleValues?.has(7)) {
+          7
+        }
+      </td>
+      <td>
+        @if (cell?.possibleValues?.has(8)) {
+          8
+        }
+      </td>
+      <td>
+      </td>
+    </tr>
+  </table>
+}

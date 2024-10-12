@@ -1,0 +1,12 @@
+.value {
+  font-size: 22px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}
+
+td {
+  font-size: 6px;
+  width: 8px;
+  height: 8px;
+}

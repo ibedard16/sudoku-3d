@@ -1,0 +1,11 @@
+<table>
+  @for (row of plane; track $index) {
+    <tr>
+      @for (cell of row; track $index) {
+        <td>
+          <s3d-sudoku-cell [cell]="cell"></s3d-sudoku-cell>
+        </td>
+      }
+    </tr>
+  }
+</table>
