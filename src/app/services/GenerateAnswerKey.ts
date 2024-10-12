@@ -57,8 +57,6 @@ export function GenerateAnswerKey(): SudokuGrid3d {
       cellToPopulate.value = valueToPopulate;
       cellToPopulate.possibleValues.delete(valueToPopulate);
       answerKey.removeClueFromNeighbors(cellToPopulate, valueToPopulate);
-
-      postMessage(answerKey.clone().get());
     }
   }
 

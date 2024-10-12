@@ -9,6 +9,6 @@ for (let shuffleStep = 0; shuffleStep < 100; ++shuffleStep) {
 }
 
 answerKey.swapColumnPlane(0, 1);
-setTimeout(() => postMessage(answerKey.clone().get()), 1000);
+postMessage(answerKey.clone().get());
 
 console.log('Answer key is valid?', IsValidGrid(answerKey));
