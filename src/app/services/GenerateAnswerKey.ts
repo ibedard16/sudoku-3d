@@ -60,5 +60,9 @@ export function GenerateAnswerKey(): SudokuGrid3d {
     }
   }
 
+  for (let shuffleStep = 0; shuffleStep < 100; ++shuffleStep) {
+    answerKey.shuffle();
+  }
+
   return answerKey;
 }
