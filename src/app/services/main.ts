@@ -11,8 +11,8 @@ interface IGenerationStep {
 
 const generationHistory: IGenerationStep[] = [];
 
-const grid = new SudokuGrid3d();
-const allCubes = grid.getAllCubes();
+const answerKey = new SudokuGrid3d();
+const allCubes = answerKey.getAllCubes();
 const valuesToPopulate = [1, 2, 3, 4, 5, 6, 7, 8]
   .sort(() => Math.random() - 0.5).sort(() => Math.random() - 0.5).sort(() => Math.random() - 0.5);
 
@@ -24,18 +24,18 @@ for (let valueIndexToPopulate = 0; valueIndexToPopulate < 8; ++valueIndexToPopul
     const cellsValueCanBePlacedIn = cubeToPopulate
       .filter(cell => cell.value == null && cell.possibleValues.has(valueToPopulate));
 
-    if (cellsValueCanBePlacedIn.length === 0 || IsValidGrid(grid) === false) {
+    if (cellsValueCanBePlacedIn.length === 0 || IsValidGrid(answerKey) === false) {
       // rewind to last generation step
       const lastGenerationStep = generationHistory.pop();
       if (lastGenerationStep == null) {
         throw new Error('No more generation steps to rewind to (God I hope this never happens)');
       }
 
-      grid.apply(lastGenerationStep.cachedGrid);
+      answerKey.apply(lastGenerationStep.cachedGrid);
       valueToPopulate = valuesToPopulate[lastGenerationStep.valueIndex];
       cubeToPopulateIndex = lastGenerationStep.cubeIndex - 1;
 
-      const cellChosen = grid.getCell(lastGenerationStep.cellPopulated.rowIndex, lastGenerationStep.cellPopulated.columnIndex, lastGenerationStep.cellPopulated.towerIndex);
+      const cellChosen = answerKey.getCell(lastGenerationStep.cellPopulated.rowIndex, lastGenerationStep.cellPopulated.columnIndex, lastGenerationStep.cellPopulated.towerIndex);
       cellChosen.possibleValues.delete(valueToPopulate);
 
       continue;
@@ -45,7 +45,7 @@ for (let valueIndexToPopulate = 0; valueIndexToPopulate < 8; ++valueIndexToPopul
     const cellToPopulate = cellsValueCanBePlacedIn[0];
 
     const generationStep: IGenerationStep = {
-      cachedGrid: grid.clone(),
+      cachedGrid: answerKey.clone(),
       valueIndex: valueIndexToPopulate,
       cubeIndex: cubeToPopulateIndex,
       cellPopulated: cellToPopulate,
@@ -54,17 +54,17 @@ for (let valueIndexToPopulate = 0; valueIndexToPopulate < 8; ++valueIndexToPopul
 
     cellToPopulate.value = valueToPopulate;
     cellToPopulate.possibleValues.delete(valueToPopulate);
-    grid.removeClueFromNeighbors(cellToPopulate, valueToPopulate);
+    answerKey.removeClueFromNeighbors(cellToPopulate, valueToPopulate);
 
-    postMessage(grid.clone().get());
+    postMessage(answerKey.clone().get());
   }
 }
 
 for (let shuffleStep = 0; shuffleStep < 100; ++shuffleStep) {
-  grid.shuffle();
+  answerKey.shuffle();
 }
 
-grid.swapColumnPlane(0, 1);
-setTimeout(() => postMessage(grid.clone().get()), 1000);
+answerKey.swapColumnPlane(0, 1);
+setTimeout(() => postMessage(answerKey.clone().get()), 1000);
 
-console.log(IsValidGrid(grid));
+console.log('Answer key is valid?', IsValidGrid(answerKey));
