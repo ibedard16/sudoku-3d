@@ -1,11 +1,11 @@
-<table>
+<div class="plane">
   @for (row of plane; track $index) {
-    <tr>
+    <div class="row">
       @for (cell of row; track $index) {
-        <td>
+        <div class="cell">
           <s3d-sudoku-cell [cell]="cell"></s3d-sudoku-cell>
-        </td>
+        </div>
       }
-    </tr>
+    </div>
   }
-</table>
+</div>
